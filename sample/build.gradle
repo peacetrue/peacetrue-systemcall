@@ -1,0 +1,25 @@
+plugins {
+    id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group "com.github.peacetrue"
+version "${systemcallVersion}${tailSnapshot}"
+description "系统调用样章"
+
+dependencies {
+    implementation "com.github.peacetrue:peacetrue-systemcall:${systemcallVersion}${tailSnapshot}"
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.github.peacetrue.systemcall.SystemCallApplication',
+                'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' ')
+        )
+    }
+}

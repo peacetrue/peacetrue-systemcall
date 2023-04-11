@@ -1,0 +1,15 @@
+plugins {
+    id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
+}
+
+group "com.github.peacetrue"
+version "${systemcallVersion}${tailSnapshot}"
+description "系统调用"
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.github.peacetrue.systemcall.SystemCallApplication',
+        )
+    }
+}

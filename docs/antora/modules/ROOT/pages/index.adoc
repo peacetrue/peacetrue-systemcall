@@ -1,0 +1,43 @@
+= 概述
+:website: https://peacetrue.github.io
+:app-group: com.github.peacetrue.systemcall
+:app-name: systemcall
+:foresight-repo-id:
+:imagesdir: docs/antora/modules/ROOT/assets/images
+
+image:https://img.shields.io/github/actions/workflow/status/peacetrue/{app-name}/main.yml?branch=master["GitHub Workflow Status",link="https://github.com/peacetrue/{app-name}/actions"]
+image:https://snyk.io/test/github/peacetrue/{app-name}/badge.svg["Snyk",link="https://app.snyk.io/org/peacetrue"]
+image:https://api-public.service.runforesight.com/api/v1/badge/success?repoId={foresight-repo-id}["Foresight",link="https://foresight.thundra.io/repositories/github/peacetrue/{app-name}/test-runs"]
+image:https://img.shields.io/codecov/c/github/peacetrue/{app-name}/master["Codecov",link="https://app.codecov.io/gh/peacetrue/{app-name}"]
+image:https://img.shields.io/nexus/r/{app-group}/{app-name}?label={app-name}&server=https%3A%2F%2Foss.sonatype.org%2F["{app-name}",link="https://search.maven.org/search?q={app-name}"]
+
+//@formatter:off
+
+== 简介（What）
+
+{website}/{app-name}/[{app-name}] 用于测试 Java 代码中包含的系统调用。
+
+== 背景（Why）
+
+系统调用是操作系统提供的编程接口，了解 Java 代码中执行了哪些系统调用，有助于我们从底层理解代码的含义。
+
+== 用法（How）
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+git clone https://github.com/peacetrue/peacetrue-systemcall
+cd sample
+./strace.sh clean
+----
+
+== 参与者（Who）
+
+. peace(xiayouxue@hotmail.com)
+
+== 活动（When）
+
+初始提交于 2023-04-11，最近提交于 {docdate}。
+
+== 许可证（License）
+
+https://github.com/peacetrue/{app-name}/blob/master/LICENSE[Apache License 2.0^]

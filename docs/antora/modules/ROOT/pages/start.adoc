@@ -1,0 +1,17 @@
+= 快速入门
+
+注意：需运行在 Linux 系统上，JDK 版本在 1.8 及以上。
+
+== 检出代码
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+git clone https://github.com/peacetrue/peacetrue-systemcall
+cd sample
+# clean 表示清除历史线程文件
+./strace.sh clean
+----
+
+== 自定义线程实现
+
+实现 `ThreadInfo` 接口，然后在 `com.github.peacetrue.systemcall.ThreadInfo` 中配置实现类。

@@ -1,0 +1,82 @@
+= 参考指南
+
+在 Linux 系统上，使用 `strace` 追踪系统调用；
+macOS 上 `dtrace` 存在权限问题，不支持。
+
+== 简单案例
+
+.SystemCallApplication
+[source%nowrap,java]
+----
+include::example$SystemCallApplication.java[]
+----
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+javac SystemCallApplication.java
+# 为了方便观察，每个线程中的系统调用单独输入到一个文件
+mkdir -p strace
+strace -ff -o strace/thread java SystemCallApplication
+rm -rf strace && mkdir -p strace
+----
+
+.线程分析
+. 线程号有序排列
+. 第 1 个线程为 strace 追踪线程
+. 第 2 个线程为 Java 主线程
+. 第 n 个线程（末尾）为 Java 主线程中创建的线程
+. 退出进程时，会新增一个处理退出信号的线程 "SIGINT handler"
+
+当不确定某个系统调用是否对应线程产生时，如何通过差异化对比准确判断呢？
+
+== 封装案例
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./strace.sh clean
+----
+
+== futex
+
+`futex` 是 Linux 操作系统中用于实现线程同步的一种系统调用。它允许进程或线程等待某个条件变量，直到该条件被满足才能继续执行。
+
+`futex` 系统调用的一般语法如下:
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+int futex(const struct futex_args *args, int mutex, int condition, int mode, unsigned int *seq, const struct timespec *timeout);
+----
+其中，mutex 表示要竞争的锁，condition 表示等待的条件变量，mode 表示操作模式，seq 用于记录 futex 操作的顺序号，timeout 用于指定等待超时的时间。
+
+下面是 futex 系统调用的几个常用参数的含义:
+
+. mutex:要竞争的锁。如果 mutex 为 0,表示不使用锁。
+. condition:等待的条件变量。如果 condition 为 0,表示不需要等待条件变量。
+. mode:操作模式。可能的取值包括 FUTEX_PRIVATE、FUTEX_Shared 和 FUTEX_ Public。
+. seq:用于记录 futex 操作的顺序号。
+. timeout:等待超时的时间，单位为秒。如果 timeout 为 0,表示不会等待超时。
+
+使用 futex 系统调用需要传入适当的参数，并使用 futex_wait、futex_timedwait 或 futex_wait_random 函数来等待条件变量的满足。
+这些函数会返回一个状态码，指示条件是否已经满足，或者返回一个错误码表示出现了错误。
+
+
+// `futex(0x7fd79c1bf308, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY`
+
+
+
+////
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+# 根据文件统计线程数目
+ls -l strace | wc -l
+# 获取进程 ID
+pid=$(jps | grep -e "sample" | awk '{print $1}')
+# 通过 ps 命令统计线程数目
+ps -T -p $pid | wc -l
+# 通过 jstack 命令统计线程数目
+jstack $pid | grep 'tid=' | wc -l
+# jcmd $pid Thread.print | grep 'tid=' | wc -l
+----
+////
+
+

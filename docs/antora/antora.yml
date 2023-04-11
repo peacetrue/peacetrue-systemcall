@@ -1,0 +1,12 @@
+name: systemcall
+title: 系统调用
+version: master
+asciidoc:
+  attributes:
+    numbered: '@'
+    website: https://peacetrue.github.io
+    app-group: com.github.peacetrue
+    app-name: systemcall
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/nav.adoc
