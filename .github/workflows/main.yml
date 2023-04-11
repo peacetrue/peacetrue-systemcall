@@ -28,18 +28,18 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
 
-    # 使用 Gradle 构建
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-      with:
-        arguments: build
-
       # 使用 Gradle 构建
     - name: Build with Gradle
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
       with:
         build-root-directory: sample
         arguments: shadowJar
+
+    # 使用 Gradle 构建
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+      with:
+        arguments: build
 
     # 单元测试
     - name: Analyze Test and/or Coverage Results

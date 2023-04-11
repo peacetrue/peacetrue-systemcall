@@ -3,7 +3,7 @@
 site:
   title: 系统调用
   url: https://peacetrue.github.io
-  start_page: systemcall::index.adoc
+  start_page: peacetrue-systemcall::index.adoc
 asciidoc:
   extensions:
     - asciidoctor-plantuml

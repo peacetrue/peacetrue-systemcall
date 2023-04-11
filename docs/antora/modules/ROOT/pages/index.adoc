@@ -1,8 +1,8 @@
 = 概述
 :website: https://peacetrue.github.io
-:app-group: com.github.peacetrue.systemcall
-:app-name: systemcall
-:foresight-repo-id:
+:app-group: com.github.peacetrue
+:app-name: peacetrue-systemcall
+:foresight-repo-id: 21230569-a7a7-4ebe-a7b6-b2c28ab962d6
 :imagesdir: docs/antora/modules/ROOT/assets/images
 
 image:https://img.shields.io/github/actions/workflow/status/peacetrue/{app-name}/main.yml?branch=master["GitHub Workflow Status",link="https://github.com/peacetrue/{app-name}/actions"]
