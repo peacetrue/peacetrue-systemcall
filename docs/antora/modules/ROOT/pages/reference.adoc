@@ -33,10 +33,13 @@ rm -rf strace && mkdir -p strace
 
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
+# clean 表示清除历史线程文件
 ./strace.sh clean
 ----
 
 == futex
+
+`LockSupport.park()` 底层会调用 `futex`。
 
 `futex` 是 Linux 操作系统中用于实现线程同步的一种系统调用。它允许进程或线程等待某个条件变量，直到该条件被满足才能继续执行。
 

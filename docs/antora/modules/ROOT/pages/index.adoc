@@ -15,7 +15,7 @@ image:https://img.shields.io/nexus/r/{app-group}/{app-name}?label={app-name}&ser
 
 == 简介（What）
 
-{website}/{app-name}/[{app-name}] 用于测试 Java 代码中包含的系统调用。
+{website}/{app-name}/[{app-name}] 用于观察 Java 代码中使用的系统调用。
 
 == 背景（Why）
 
